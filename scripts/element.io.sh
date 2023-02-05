@@ -52,7 +52,7 @@ cat ../keystore.properties >> gradle.properties
 cd $DIR
 
 echo "RUN Build"
-docker run -t --rm -v $DIR/element-android:/app androidsdk/android-31 bash -c "cd /app/ && /app/gradlew -q assembleFdroidRelease assembleGplayRelease"
+docker run -t --rm -v $DIR/element-android:/app androidsdk/android-31 bash -c "cd /app/ && /app/gradlew assembleFdroidRelease assembleGplayRelease"
 
 echo "Saving Release $LATEST"
 cp element-android/vector-app/build/outputs/apk/fdroid/release/vector-fdroid-arm64-v8a-release.apk "releases/matrix-fdroid-$LATEST.apk"

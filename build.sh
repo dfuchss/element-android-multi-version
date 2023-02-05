@@ -8,8 +8,14 @@ sed -i 's/resValue \"string\", \"app_name\", \"Element\"/resValue "string", "app
 sed -i 's/\/\/ signingConfig signingConfigs.release/signingConfig signingConfigs.release/g' vector-app/build.gradle
 sed -i 's/fdroid {/fdroid {\n            applicationIdSuffix \".fkit\"/g' vector-app/build.gradle
 sed -i 's/gplay {/gplay {\n            applicationIdSuffix \".gkit\"/g' vector-app/build.gradle
-// Set signing ..
+# Fix package_name for google services
+sed -i 's/\"package_name\": \"im.vector.app\"/"package_name": "im.vector.app.gkit"/g' vector-app/src/gplay/release/google-services.json
 
-docker run -t --rm -v $(pwd):/app androidsdk/android-31 bash -c "cd /app/ && /app/gradlew -q assembleFdroidRelease"
+# Set signing .. TODO
+
+# Build APKs
+docker run -t --rm -v $(pwd):/app androidsdk/android-31 bash -c "cd /app/ && /app/gradlew assembleFdroidRelease assembleGplayRelease"
+
+# Copy APKs .. TODO
 
 cd $START

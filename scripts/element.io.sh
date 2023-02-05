@@ -3,7 +3,7 @@
 mkdir -p releases
 
 DEPLOY="$GITHUB_WORKSPACE/fdroid"
-PWD=$(pwd)
+DIR=$(pwd)
 LATEST=$(curl --silent "https://api.github.com/repos/vector-im/element-android/releases/latest" | jq -r .tag_name)
 echo "Latest Version $LATEST"
 
@@ -28,7 +28,7 @@ fi
 echo "Switching to $LATEST"
 cd element-android && git clean -f -x -q && git reset -q --hard && git fetch -q && git checkout -q $LATEST && git clean -q -d -x -f
 
-cd $PWD/element-android
+cd $DIR/element-android
 echo "Applying Modifications in $DIR/element-android"
 sed -i 's/resValue \"string\", \"app_name\", \"Element\"/resValue "string", "app_name", "Matrix (KIT)"/g' vector-app/build.gradle
 sed -i 's/\/\/ signingConfig signingConfigs.release/signingConfig signingConfigs.release/g' vector-app/build.gradle
@@ -46,7 +46,7 @@ sed -i '/signing.element.keyId.*/d' gradle.properties
 sed -i '/signing.element.keyPassword.*/d' gradle.properties
 cat ../keystore.properties >> gradle.properties
 
-cd $PWD
+cd $DIR
 
 echo "RUN Build"
 docker run -t --rm -v $DIR/element-android:/app androidsdk/android-31 bash -c "cd /app/ && /app/gradlew -q assembleFdroidRelease assembleGplayRelease"

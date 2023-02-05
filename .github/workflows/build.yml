@@ -18,6 +18,9 @@ jobs:
       - run: git config --global user.email "ci@fuchss.org" && git config --global user.name "GitHub CI"
       
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Remove last build (iff any)
+        run: sudo rm -rf element-android
+        
       - uses: actions/checkout@v2
       - uses: actions/checkout@v2
         with:

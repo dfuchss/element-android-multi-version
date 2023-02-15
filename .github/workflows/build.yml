@@ -11,10 +11,21 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Setup Swap
+        shell: bash
+        run: |
+            export SWAP_FILE=$(swapon --show=NAME | tail -n 1)
+            sudo swapoff $SWAP_FILE
+            sudo rm $SWAP_FILE
+            sudo fallocate -l 8G $SWAP_FILE
+            sudo chmod 600 $SWAP_FILE
+            sudo mkswap $SWAP_FILE
+            sudo swapon $SWAP_FILE
+    
       - run: git config --global user.email "ci@fuchss.org" && git config --global user.name "GitHub CI"
       
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

@@ -57,8 +57,8 @@ echo "RUN Build"
 docker run -t --rm -v $DIR/element-android:/app androidsdk/android-31 bash -c "cd /app/ && /app/gradlew assembleFdroidRustCryptoRelease assembleGplayRustCryptoRelease"
 
 echo "Saving Release $LATEST"
-cp element-android/vector-app/build/outputs/apk/fdroid/release/vector-fdroid-arm64-v8a-release.apk "releases/matrix-fdroid-$LATEST.apk"
-cp element-android/vector-app/build/outputs/apk/gplay/release/vector-gplay-arm64-v8a-release.apk "releases/matrix-gplay-$LATEST.apk"
+cp element-android/vector-app/build/outputs/apk/fdroidRustCrypto/release/vector-fdroid-*-arm64-v8a-release.apk "releases/matrix-fdroid-$LATEST.apk"
+cp element-android/vector-app/build/outputs/apk/gplayRustCrypto/release/vector-gplay-*-arm64-v8a-release.apk "releases/matrix-gplay-$LATEST.apk"
 sudo rm -rf "$DIR/element-android"
 
 echo "Saving Release for Deployment to $DEPLOY"

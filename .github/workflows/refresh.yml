@@ -1,0 +1,30 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Refresh Repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: git config --global user.email "ci@fuchss.org" && git config --global user.name "GitHub CI"
+      
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          ref: "fdroid"
+          path: "fdroid"
+      
+      - name: Init Repository Secrets
+        run: echo $KEYSTORE_FILE | base64 --decode > fdroid/keystore.p12
+        env:
+          KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
+      
+      - name: Update F-Droid Repo
+        working-directory: fdroid
+        run: sudo apt-get update && sudo apt-get install fdroidserver -y && fdroid update
+      
+      - run: cd fdroid && git add . && git commit -m "Update from $GITHUB_SHA" && git push origin fdroid

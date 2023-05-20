@@ -87,4 +87,4 @@ else
         echo "Meta Data not present. Please update on your own"
 fi
 
-docker run --rm -u $UID -v $DEPLOY:/repo registry.gitlab.com/fdroid/docker-executable-fdroidserver:master update
+docker run --rm -v $DEPLOY:/repo registry.gitlab.com/fdroid/docker-executable-fdroidserver:master update

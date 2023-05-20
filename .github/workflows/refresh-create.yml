@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Refresh Repository
+name: Refresh Repository (Create)
 
 on:
   workflow_dispatch:
@@ -25,6 +25,6 @@ jobs:
       
       - name: Update F-Droid Repo
         working-directory: fdroid
-        run: sudo apt-get update && sudo apt-get install fdroidserver -y && fdroid update
+        run: sudo apt-get update && sudo apt-get install fdroidserver -y && fdroid update -c
       
       - run: cd fdroid && git add . && git commit -m "Update from $GITHUB_SHA" && git push origin fdroid

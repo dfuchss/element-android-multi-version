@@ -32,9 +32,8 @@ cd element-android && git clean -f -x -q && git reset -q --hard && git fetch -q 
 
 cd $DIR/element-android
 echo "Applying Modifications in $DIR/element-android"
-# sed -e '/org.gradle.jvmargs/ s/^#*/#/' -i gradle.properties
-sed -i 's/resValue \"string\", \"app_name\", \"Element\"/resValue "string", "app_name", "Matrix (KIT)"/g' vector-app/build.gradle
-sed -i 's/resValue \"color\", \"launcher_background\", \"#0DBD8B\"/resValue "color", "launcher_background", "#31AD93"/g' vector-app/build.gradle
+# Rename and change color of icon
+sed -i 's/resValue \"string\", \"app_name\", \"Element\"/resValue "string", "app_name", "Matrix (KIT)"\n            resValue "color", "launcher_background", "#31AD93"/g' vector-app/build.gradle
 
 sed -i 's/\/\/ signingConfig signingConfigs.release/signingConfig signingConfigs.release/g' vector-app/build.gradle
 sed -i 's/fdroid {/fdroid {\n            applicationIdSuffix \".fkit\"/g' vector-app/build.gradle

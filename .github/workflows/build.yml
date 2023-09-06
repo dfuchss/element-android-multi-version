@@ -32,8 +32,8 @@ jobs:
       - name: Remove last build (iff any)
         run: sudo rm -rf element-android
         
-      - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: "fdroid"
           path: "fdroid"

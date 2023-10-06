@@ -1,0 +1,26 @@
+{
+  "/etc/issue.net": "Ubuntu 22.04.3 LTS",
+  "commandLine": [
+    "/usr/bin/fdroid update"
+  ],
+  "fdroiddata": {
+    "commitId": "b93c14f5119388054676da82870ddea143c694a2",
+    "isDirty": true,
+    "modifiedFiles": [
+      "metadata/im.vector.app.fkit.yml",
+      "metadata/im.vector.app.gkit.yml",
+      "repo/index-v1.jar",
+      "repo/index-v1.json",
+      "repo/index.jar",
+      "repo/index.xml",
+      "repo/matrix-fdroid-v1.6.0.apk",
+      "repo/matrix-gplay-v1.6.0.apk"
+    ],
+    "untrackedFiles": [
+      "repo/matrix-fdroid-v1.6.6.apk",
+      "repo/matrix-gplay-v1.6.6.apk"
+    ]
+  },
+  "startTimestamp": 1696597124000,
+  "subcommand": "update"
+}
